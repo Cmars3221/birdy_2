@@ -101,6 +101,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    pg (0.18.4)
     phaser-rails (2.0.3.0)
       railties
     rack (1.6.4)
@@ -183,6 +184,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   paperclip
+  pg
   phaser-rails
   rails (= 4.2.4)
   sass-rails (~> 5.0)
