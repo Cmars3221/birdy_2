@@ -1,0 +1,37 @@
+<div id="signup_wrapper">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-push-8 col-md-4">
+      <p>Sign Up</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-push-4 col-md-7">
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+          <div class="signup">
+            <%= f.text_field :username, class: "signup_info", placeholder: "Username" %><br>
+         
+            <%= f.email_field :email, autofocus: true, class: "signup_info", placeholder: "Email" %><br>
+   
+            <%= f.password_field :password, class: "signup_info", placeholder: "Password (Min. 8 Characters)", autocomplete: "off" %>
+            <br>
+   
+            <%= f.password_field :password_confirmation, class: "signup_info", placeholder: "Confirm Password", autocomplete: "off" %><br>
+            <br>
+            
+            <%= f.submit "Sign up", class: "signup_button" %>
+            <%= link_to "Back", root_path, class: "back_button" %>
+
+          </div>
+    
+      <% end %>
+    </div>
+
+  <%= render :partial => "shared/for_signup" %>
+  </div>
+  
+</div>

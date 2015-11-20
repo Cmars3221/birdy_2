@@ -1,0 +1,18 @@
+<div class="wrapper">
+	<%= render :partial => "shared/navbar" %>
+
+	<div class="side_column">
+		<%= render :partial => "shared/profile_column" %>
+	</div>
+
+	<h2>You Sure About This Punk?</h2>
+	
+	<div class="right_side_profile">
+
+		<p>You wont do it? NO BALLS</p><br>
+
+		<%= button_to "DELETE MY ACCOUNT", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "deletion" %>
+
+	</div>
+
+</div>

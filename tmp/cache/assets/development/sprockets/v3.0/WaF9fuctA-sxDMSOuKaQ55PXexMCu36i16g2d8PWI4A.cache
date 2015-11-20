@@ -1,0 +1,13 @@
+I"¡(function() {
+  var init;
+
+  init = function() {
+    return Game.setup();
+  };
+
+  $(document).ready(init);
+
+  $(document).on('page:load', init);
+
+}).call(this);
+:ET

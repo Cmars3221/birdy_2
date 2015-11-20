@@ -1,0 +1,26 @@
+I"(function() {
+  this.Game = (function() {
+    var GAME_HEIGHT, GAME_WIDTH;
+
+    function Game() {}
+
+    GAME_WIDTH = 288;
+
+    GAME_HEIGHT = 505;
+
+    Game.setup = function() {
+      var game;
+      game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, 'game');
+      game.state.add('boot', States.Boot);
+      game.state.add('preload', States.Preload);
+      game.state.add('menu', States.Menu);
+      game.state.add('play', States.Play);
+      return game.state.start('boot');
+    };
+
+    return Game;
+
+  })();
+
+}).call(this);
+:ET

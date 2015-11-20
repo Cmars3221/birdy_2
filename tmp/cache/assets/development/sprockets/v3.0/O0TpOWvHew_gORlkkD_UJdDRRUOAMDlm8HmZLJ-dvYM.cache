@@ -1,0 +1,92 @@
+I"Ô
+(function() {
+  var Bird, Ground, Pipe,
+    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
+
+  this.Sprites = {
+    Bird: Bird = (function(superClass) {
+      extend(Bird, superClass);
+
+      function Bird(game, x, y, frame) {
+        Bird.__super__.constructor.call(this, game, x, y, 'bird', frame);
+        this.anchor.setTo(0.5, 0.5);
+        this.animations.add('flap');
+        this.animations.play('flap', 12, true);
+        this.game.physics.arcade.enableBody(this);
+        this.body.allowGravity = false;
+        this.body.collideWorldBounds = true;
+        this.checkWorldBounds = true;
+        this.outOfBoundsKill = true;
+        this.flapSound = this.game.add.audio('flap');
+        this.name = 'bird';
+        this.alive = false;
+        this.onGround = false;
+        this.events.onKilled.add(this.onKilled, this);
+      }
+
+      Bird.prototype.flap = function() {
+        if (this.alive) {
+          this.flapSound.play();
+          this.body.velocity.y = -400;
+          this.game.add.tween(this).to({
+            angle: -40
+          }, 100).start();
+        }
+      };
+
+      Bird.prototype.update = function() {
+        if (this.angle < 90 && this.alive) {
+          this.angle += 2.5;
+        }
+        if (!this.alive) {
+          this.body.velocity.x = 0;
+        }
+      };
+
+      Bird.prototype.onKilled = function() {
+        var duration;
+        this.exists = true;
+        this.visible = true;
+        this.animations.stop();
+        duration = 90 / this.y * 300;
+        return this.game.add.tween(this).to({
+          angle: 90
+        }, duration).start();
+      };
+
+      return Bird;
+
+    })(Phaser.Sprite),
+    Pipe: Pipe = (function(superClass) {
+      extend(Pipe, superClass);
+
+      function Pipe(game, x, y, frame) {
+        Pipe.__super__.constructor.call(this, game, x, y, 'pipe', frame);
+        this.anchor.setTo(0.5, 0.5);
+        this.game.physics.arcade.enableBody(this);
+        this.body.allowGravity = false;
+        this.body.immovable = true;
+      }
+
+      return Pipe;
+
+    })(Phaser.Sprite),
+    Ground: Ground = (function(superClass) {
+      extend(Ground, superClass);
+
+      function Ground(game, x, y, width, height) {
+        Ground.__super__.constructor.call(this, game, x, y, width, height, 'ground');
+        this.autoScroll(-200, 0);
+        this.game.physics.arcade.enableBody(this);
+        this.body.allowGravity = false;
+        this.body.immovable = true;
+      }
+
+      return Ground;
+
+    })(Phaser.TileSprite)
+  };
+
+}).call(this);
+:ET
